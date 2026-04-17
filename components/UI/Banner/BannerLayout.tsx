@@ -8,7 +8,7 @@ const BannerLayout = ({
 }: {
   children: React.ReactNode;
   bgProperties: {
-    bgImage?: string;
+    bgImage?: string | null;
     bgColor?: string;
     bgPosition?: string;
     maxWidthText?: string;
@@ -21,13 +21,11 @@ const BannerLayout = ({
     : {};
   const heights = {
     md: "h-48",
-    lg: "h-80",
+    lg: "h-[420px]",
   };
-  const customHeight = heights[height];
-  console.log(customHeight);
   return (
     <div
-      className={`${bgProperties.bgColor ? `bg-[${bgProperties.bgColor}]` : ""} relative mx-auto mb-5 flex max-${customHeight} h-full w-full flex-col items-start   gap-4 ${rounded ? "rounded-2xl" : "rounded-none"} bg-cover px-7 py-4  bg-${bgProperties.bgPosition}`}
+      className={`${bgProperties.bgColor ? `bg-[${bgProperties.bgColor}]` : ""} relative mx-auto mb-5 flex ${heights[height]} ${`max-` + heights[height]} w-full flex-col items-start  gap-4 ${rounded ? "rounded-2xl" : "rounded-none"} bg-cover px-7 py-4  bg-${bgProperties.bgPosition}`}
       style={style}
     >
       {children}

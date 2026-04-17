@@ -1,7 +1,7 @@
 "use server";
 
-import { getURL } from "@/utils/helpers";
-import { createClient } from "@/utils/supabase/server/server";
+import { getURL } from "@/lib/utils/helpers";
+import { createClient } from "@/lib/utils/supabase/server/server";
 import { Provider } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
@@ -11,8 +11,7 @@ export async function login(formData: FormData) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
+
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
@@ -33,8 +32,6 @@ export async function signup(formData: FormData) {
 
   const supabase = createClient(cookieStore);
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,

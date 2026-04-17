@@ -1,24 +1,28 @@
 import getSubCategories from "../queries/get-subCategories";
-import { TypedSupabaseClient } from "@/utils/types";
+import { TypedSupabaseClient } from "@/lib/utils/types";
 
 export default function useSubCategoriesQuery({
   slug,
-  client
+  client,
 }: {
   slug: string | string[];
-  client: TypedSupabaseClient
+  client: TypedSupabaseClient;
 }) {
   const queryFn = async () => {
-    const slugString = Array.isArray(slug) ? slug[0] : slug;
-    const data = await client
-      .from("categories")
-      .select()
-      .eq("label", slugString.toLocaleLowerCase());
-    if (data.data) {
-      //Check if data exists
-      return getSubCategories(client, data.data[0].id).then(
-        (results) => results.data,
-      );
+    try {
+      const slugString = Array.isArray(slug) ? slug[0] : slug;
+      const data = await client
+        .from("categories")
+        .select()
+        .eq("label", slugString.toLocaleLowerCase());
+      if (data.data) {
+        //Check if data exists
+        return getSubCategories(client, data.data[0].id).then(
+          (results) => results.data,
+        );
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
   const queryKey = ["subCategories"];

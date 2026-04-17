@@ -22,6 +22,7 @@ export default function Header({screenDimention = "normal"}: {screenDimention?: 
             id="categoriesId"
             className="border-l-2 border-black hidden sm:block"
             defaultValue={"DEFAULT"}
+            aria-label="select"
           >
             <option value="DEFAULT">All categories</option>
             <option value=""></option>

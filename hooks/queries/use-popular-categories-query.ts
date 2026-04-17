@@ -1,5 +1,5 @@
 import { getPopularCategories } from "../func/getPopularCategories";
-import { TypedSupabaseClient } from "@/utils/types";
+import { TypedSupabaseClient } from "@/lib/utils/types";
 
 function usePopularCategoriesQuery({
   client,

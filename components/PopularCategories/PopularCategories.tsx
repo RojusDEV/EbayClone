@@ -6,8 +6,7 @@ import CardImage from "../UI/Card/CardImage";
 import Image from "next/image";
 import usePopularCategoriesQuery from "@/hooks/queries/use-popular-categories-query";
 import { useQuery } from "@tanstack/react-query";
-import useSupabaseBrowser from "@/utils/supabase-browser";
-
+import useSupabaseBrowser from "@/lib/utils/supabase-browser";
 const PopularCategories = () => {
   const supabaseClient = useSupabaseBrowser();
   const { data: popularCategories } = useQuery(

@@ -6,7 +6,7 @@ export default function ExploreByCategories() {
       <div className="">
         <span>Explore Popular Categories</span>
         <div className="">
-          {/* Get 7 by most popular  */}
+          {/* Get 7 by most popular  */}  
           
         </div>
       </div>

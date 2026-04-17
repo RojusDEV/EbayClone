@@ -1,11 +1,11 @@
-import useSupabaseBrowser from "@/utils/supabase-browser";
+import useSupabaseBrowser from "@/lib/utils/supabase-browser";
 import getBanners from "./get-banners";
 import { useQuery } from "@tanstack/react-query";
 
-export default function useBannersQuery() {
+export default function useBannersQuery(bannerId?: number) {
   const client = useSupabaseBrowser();
   const queryFn = async () => {
-    return getBanners(client).then((result) => result.data);
+    return getBanners(client, bannerId).then((result) => result.data);
   };
   return useQuery({
     queryKey: ["banners"],

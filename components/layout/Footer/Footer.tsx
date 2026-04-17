@@ -2,12 +2,13 @@ import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
+
   return (
-    <footer className="mt-4 border-t-2 bg-neutral-100 col-span-2">
-      <div className="row md:grid  mx-auto hidden max-w-7xl grid-cols-5 py-16">
+    <footer className="mt-4 w-full border-t-2 bg-neutral-100">
+      <div className="row mx-auto hidden max-w-7xl grid-cols-5 px-4 py-16 md:grid xl:px-0">
         <div className="">
+          <span className="text-xs font-bold">Buy</span>
           <ul>
-            <span className="text-xs font-bold">Buy</span>
             <li>
               <Link href="" className="text-xs">
                 Registration
@@ -31,8 +32,8 @@ const Footer = () => {
           </ul>
         </div>
         <div className="">
+          <span className="text-xs font-bold">Sell</span>
           <ul>
-            <span className="text-xs font-bold">Sell</span>
             <li>
               <Link href="" className="text-xs">
                 Start selling
@@ -49,8 +50,8 @@ const Footer = () => {
               </Link>
             </li>
           </ul>
+          <span className="text-xs font-bold">Tools & apps</span>
           <ul>
-            <span className="text-xs font-bold">Tools & apps</span>
             <li>
               <Link href="" className="text-xs">
                 Developers
@@ -69,8 +70,8 @@ const Footer = () => {
           </ul>
         </div>
         <div className="">
+          <span className="text-xs font-bold">Stay connected</span>
           <ul>
-            <span className="text-xs font-bold">Stay connected</span>
             <li>
               <Link href="" className="text-xs">
                 {`eBay's Blogs`}
@@ -138,8 +139,8 @@ const Footer = () => {
         </div>
       </div>
       {/* =====Mobile or tablet device===== */}
-      <div className="md:hidden px-8 py-16">
-        <ul className="flex gap-4 text-nowrap flex-wrap">
+      <div className="mx-auto max-w-7xl px-8 py-16 md:hidden">
+        <ul className="flex flex-wrap gap-4 text-nowrap">
           <li className="text-xs">About eBay</li>
           <li className="text-xs">Announcements</li>
           <li className="text-xs">Community</li>

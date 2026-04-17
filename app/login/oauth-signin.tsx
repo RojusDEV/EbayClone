@@ -35,7 +35,7 @@ export function OAuthButtons({showLoginMessage}: {showLoginMessage: boolean}) {
           key={provider.name}
         >
           {provider.icon}
-          {showLoginMessage ? "Login with" : ""}
+          {showLoginMessage ? "Continue with " : ""}
           {provider.displayName}
         </button>
       ))}

@@ -1,0 +1,34 @@
+{
+  "brands": [
+    {
+      "name": "Apple"
+    },
+    {
+      "name": "Dell"
+    },
+    {
+      "name": "HP"
+    },
+    {
+      "name": "Lenovo"
+    },
+    {
+      "name": "Samsung"
+    },
+    {
+      "name": "Microsoft"
+    },
+    {
+      "name": "Canon"
+    },
+    {
+      "name": "Nikon"
+    },
+    {
+      "name": "Lg"
+    },
+    {
+      "name": "GoPro"
+    }
+  ]
+}

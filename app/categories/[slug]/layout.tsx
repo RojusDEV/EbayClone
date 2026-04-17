@@ -10,7 +10,7 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 import useSubCategoriesQuery from "@/hooks/func/use-subCategories-query";
-import { createClient } from "@/utils/supabase/server/server";
+import { createClient } from "@/lib/utils/supabase/server/server";
 import { cookies } from "next/headers";
 import Footer from "@/components/layout/Footer/Footer";
 
@@ -37,7 +37,6 @@ const layout = async ({
 
   return (
     <>
-     {/* grid-cols-[18%_minmax(900px,_1fr)] */}
       <div className="mx-auto mb-12 max-w-[92rem] px-4">
         <Header screenDimention="fullScreen" />
         <div className="grid gap-8">

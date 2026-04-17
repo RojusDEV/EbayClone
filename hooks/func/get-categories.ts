@@ -1,4 +1,5 @@
-import { TypedSupabaseClient } from "../../utils/types";
+import { TypedSupabaseClient } from "@/lib/utils/types";
+
 
 const getCategories = (client: TypedSupabaseClient) => {
   return client.from("categories").select().throwOnError().single();

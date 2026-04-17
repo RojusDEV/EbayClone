@@ -53,6 +53,7 @@ const Carousel = () => {
     <div className="relative mx-auto w-full max-w-[90em] md:px-0">
       <button
         className="absolute -left-4 top-1/2 z-10 rounded-full bg-white p-2 shadow-xl"
+        aria-label="arrow back"
         onClick={showPrevImage}
       >
         <IoChevronBackOutline size={20} />
@@ -85,6 +86,7 @@ const Carousel = () => {
         <button
           className="absolute bottom-10 right-10 rounded-full bg-gray-200 p-2"
           onClick={() => setPlay(!play)}
+          aria-label="play button"
         >
           {play ? <IoPauseOutline /> : <IoPlay />}
         </button>
@@ -92,6 +94,7 @@ const Carousel = () => {
       <button
         className="absolute -right-4 top-1/2 z-10 rounded-full bg-white p-2 shadow-xl"
         onClick={showNextImage}
+        aria-label="arrow forward"
       >
         <IoChevronForwardOutline size={20} />
       </button>

@@ -44,6 +44,4 @@
 //   return { user: user, session: session, userLoaded: userLoaded };
 // }
 
-
 // export default useSessionHook
-

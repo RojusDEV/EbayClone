@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server/server";
+import { createClient } from "@/lib/utils/supabase/server/server";
 import { cookies } from "next/headers";
 import React from "react";
 import ShopByBrandItem from "./ShopByBrandItem";
@@ -16,13 +16,13 @@ const ShopByBrand = async () => {
     .neq("brand_image_url", null);
 
   return (
-    <section>
-      <span className="text-2xl font-semibold">Shop by Brand</span>
+    <section className="mb-16">
+      <span className="font-semibold text-2xl">Shop by Brand</span>
       {/*  */}
       <ul className="mt-8 grid grid-cols-4 gap-8 lg:grid-cols-5">
         {shopByBrand?.map((el) => (
           <li key={el.id} className=" text-center">
-            <Link href={`/categories/${el.brand_name}`}>
+            <Link href={`/brand/${el.brand_name}/${el.id}`}>
               <ShopByBrandItem>
                 <Image
                   alt={el.brand_name + " logo"}
@@ -30,11 +30,6 @@ const ShopByBrand = async () => {
                   width={120}
                   src={el.brand_image_url || ""}
                 />
-                {/* <img
-                  src={el.brand_image_url || ""}
-                  alt=""
-                  className="h-full w-full"
-                /> */}
               </ShopByBrandItem>
               <span>{el.brand_name}</span>
             </Link>

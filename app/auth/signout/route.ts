@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server/server";
+import { createClient } from "@/lib/utils/supabase/server/server";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  // Check if a user's logged in
+
   const {
     data: { user },
   } = await supabase.auth.getUser();

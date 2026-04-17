@@ -1,4 +1,4 @@
-import { TypedSupabaseClient } from "@/utils/types";
+import { TypedSupabaseClient } from "@/lib/utils/types";
 
 
 const getGroups = (client: TypedSupabaseClient) => {

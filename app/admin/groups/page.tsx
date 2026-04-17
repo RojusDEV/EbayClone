@@ -1,10 +1,9 @@
 "use client";
 import useCreateGroupMutation from "@/hooks/mutations/use-create-group-mutation";
 import useGroupsQuery from "@/hooks/queries/use-groups-query";
-import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 
-const page = () => {
+const Page = () => {
   const { data: groups } = useGroupsQuery();
   const [groupName, setGroupName] = useState("");
   const createGroupMutation = useCreateGroupMutation();
@@ -32,4 +31,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

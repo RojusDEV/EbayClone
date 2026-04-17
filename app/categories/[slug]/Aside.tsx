@@ -5,7 +5,8 @@ import useSubCategoriesQuery from "@/hooks/func/use-subCategories-query";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
-import useSupabaseBrowser from "@/utils/supabase-browser";
+import useSupabaseBrowser from "@/lib/utils/supabase-browser";
+
 import useCategoryBrandsQuery from "@/hooks/queries/categoryBrands/use-categoryBrands-query";
 const Aside = ({ params }: { params: { slug: string } }) => {
   const dispatch = useDispatch();
@@ -43,10 +44,10 @@ const Aside = ({ params }: { params: { slug: string } }) => {
       <ul>
         {categoryBrands &&
           categoryBrands.map((categoryBrand) => (
-            <>
+            <div key={categoryBrand.id}>
               {/* If categoryBrands doesnt exist then "Your favorite brands should be showed" */}
               <span className="text-sm font-bold">Your favorite brands</span>
-              <li key={categoryBrand.id}>
+              <li>
                 <Link
                   href={`/categories/${categoryBrand.brand_name}`}
                   className="text-sm text-gray-700 hover:underline"
@@ -54,7 +55,7 @@ const Aside = ({ params }: { params: { slug: string } }) => {
                   {categoryBrand.brand_name}
                 </Link>
               </li>
-            </>
+            </div>
           ))}
       </ul>
     </div>

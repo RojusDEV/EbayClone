@@ -8,7 +8,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="col-span-2 lg:col-auto">
+    <div className="grid col-span-2 lg:col-auto gap-8">
       {/* main layout  */}
       <BannerLayout
         bgProperties={{
@@ -17,13 +17,14 @@ const page = () => {
           bgPosition: "center",
         }}
         rounded={false}
+        height="lg"
       >
         <BannerTitle>Reconditioned tech</BannerTitle>
         <BannerSub>See the savings on refurb devices</BannerSub>
         <EffectButton buttonName="View the deal" theme="black" />
       </BannerLayout>
       {/* TODO: IF BRAND SELECTED DONT SHOW IT  */}
-      <div className="px-8">
+      <div className="grid gap-8 px-0 sm:px-2 lg:px-8">
         {/* ===Shop by category==== */}
         <ul className=""></ul>
         {/* Shop by Brand  */}

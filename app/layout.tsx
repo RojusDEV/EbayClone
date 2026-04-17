@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ReactQueryClientProvider } from "@/utils/ReactQueryClientProvider";
+import { ReactQueryClientProvider } from "@/lib/utils/ReactQueryClientProvider";
 const inter = Inter({ subsets: ["latin"] });
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ReduxProvider from "./redux/redux-provider";

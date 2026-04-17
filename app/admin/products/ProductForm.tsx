@@ -1,83 +1,109 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client/client";
-import { Session } from "@supabase/supabase-js";
-import { JwtPayload, jwtDecode } from "jwt-decode";
+import { z } from "zod";
+import { useFormState, useFormStatus } from "react-dom";
+import toast from "react-hot-toast";
+import createInvoice from "../actions";
 
-interface JwtPayloadType extends JwtPayload {
-  user_role: string;
-}
+const ProductSchema = z.object({
+  product_name: z
+    .string()
+    .min(10, { message: "Product name should be atleast 10 characters long" })
+    .max(100, { message: "Character length exceeded 100 characters long" }),
+  category_id: z
+    .number()
+    .min(1, { message: "Id should contain atleast one character" })
+    .max(10000, { message: "Id shouldnt contain more than 10000 characters" }),
+  brand_id: z
+    .number()
+    .min(1, { message: "Id should contain atleast one character" })
+    .max(10000, { message: "Id shouldnt contain more than 10000 characters" }),
+  shipping_cost: z
+    .number()
+    .min(0)
+    .max(1000000, { message: "Shipping cost exceeded maximum 1000000" }),
+  price: z
+    .number()
+    .min(0)
+    .max(1000000000, { message: "Price exceeded maximum 1000000000" }),
+  image_src: z.string().url(),
+  sold_amount: z.number().min(0).max(100000000).optional(),
+});
+
+type ProductSchema = z.infer<typeof ProductSchema>;
 
 const ProductForm = () => {
-  const [productData, setproductData] = useState({
-    product_name: "",
-    category_id: 0,
-  });
-  const supabase = createClient();
-  const [session, setSession] = useState<Session | null>(null);
+  const [state, formAction] = useFormState(createInvoice, { errors: {} });
+  const { pending } = useFormStatus();
 
-  useEffect(() => {
-    const fetchSession = async () => {
-      const { data, error } = await supabase.auth.getSession() ;
-      if (error) {
-        console.error('Error fetching session:', error);
-      } else {
-        setSession(data.session);
-      }
+  const clientAction = async (formData: FormData) => {
+    // client-side validation
+
+    const newProduct = {
+      product_name: formData.get("product_name"),
+      category_id: Number(formData.get("category_id")),
+      brand_id: Number(formData.get("brand_id")),
+      price: Number(formData.get("brand_id")),
+      shipping_cost: Number(formData.get("brand_id")),
+      sold_amount: Number(formData.get("brand_id")),
     };
 
-    fetchSession();
+    const result = ProductSchema.safeParse(newProduct);
 
-    const authListener = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (session) {
-        const jwt = jwtDecode<JwtPayloadType>(session.access_token);
-        const userRole = jwt.user_role;
-        setSession(session);
-      }
-    });
-
-    return () => {
-      authListener.data.subscription.unsubscribe();
-    };
-  }, []);
-
-
-  const handleAddProduct = async (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    if (session) {
-      const { error } = await supabase.from("products").insert({
-        product_name: productData.product_name,
-        category_id: productData.category_id,
-        user_id: session.user.id,
+    if (!result.success) {
+      result.error.issues.forEach((issue) => {
+        toast.error(issue.path[0] + ": " + issue.message);
       });
-      console.error(error);
+      return; //Important because it's gonna call  `createInvoice` even if errors are caught
     }
+
+    await createInvoice(state, formData);
   };
+
   return (
     <div>
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" action={clientAction}>
         <input
           type="text"
           placeholder="product name"
-          onChange={(e) =>
-            setproductData({ ...productData, product_name: e.target.value })
-          }
+          name="product_name"
+          className=""
         />
         <input
           type="text"
           placeholder="category id"
-          onChange={(e) =>
-            setproductData({
-              ...productData,
-              category_id: Number(e.target.value),
-            })
-          }
+          name="category_id"
+          className=""
+        />
+        <input
+          type="text"
+          placeholder="brand id"
+          name="brand_id"
+          className=""
+        />
+        <input type="text" placeholder="price" name="price" className="" />
+        <input
+          type="text"
+          placeholder="shipping cost"
+          name="shipping_cost"
+          className=""
+        />
+        <input
+          type="text"
+          placeholder="sold amount"
+          name="sold_amount"
+          className=""
+        />
+        <input
+          type="text"
+          placeholder="image URL"
+          name="image_src"
+          className=""
         />
         <button
           className="cursor-pointer rounded-xl bg-violet-500 px-3 py-2 font-[500] text-white"
-          onClick={(e) => handleAddProduct(e)}
+          type="submit"
         >
-          Add
+          {pending ? "Submitting.." : "Add"}
         </button>
       </form>
     </div>

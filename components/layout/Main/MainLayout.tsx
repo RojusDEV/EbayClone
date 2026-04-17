@@ -16,7 +16,7 @@ import {
 } from "@tanstack/react-query";
 import Link from "next/link";
 import React from "react";
-import { createClient } from "@/utils/supabase/server/server";
+import { createClient } from "@/lib/utils/supabase/server/server";
 import { cookies } from "next/headers";
 
 const MainLayout = async () => {

@@ -1,5 +1,5 @@
 import Categories from "@/components/frontend/admin/Categories";
-import { createClient } from "@/utils/supabase/server/server";
+import { createClient } from "@/lib/utils/supabase/server/server";
 import { cookies } from "next/headers";
 const CategoriesPage = async () => {
   const cookieStore = cookies();
@@ -7,8 +7,6 @@ const CategoriesPage = async () => {
 
   const { data: categories } = await supabase.from("categories").select().throwOnError();
   console.log(categories);
-
-  
 
 
   return (
